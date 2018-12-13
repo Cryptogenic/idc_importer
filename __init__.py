@@ -37,7 +37,7 @@ class ImportIDCInBG(BackgroundTaskThread):
 	def __init__(self, binaryView, idcFile):
 		global task
 
-		BackgroundTaskThread.__init__(self, "Importing ID...", False)
+		BackgroundTaskThread.__init__(self, "Importing IDC...", False)
 
 		# A binaryview is needed for common binja functions
 		self.binaryView = binaryView

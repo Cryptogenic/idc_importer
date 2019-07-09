@@ -11,9 +11,6 @@
 		},
 		"version": "1.0",
 		"author": "SpecterDev",
-		"minimumBinaryNinjaVersion": {
-			"dev": "1.0.dev-175",
-			"release": "1.0.13"
-		}
+		"minimumBinaryNinjaVersion": 13
 	}
 }

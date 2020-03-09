@@ -141,7 +141,7 @@ def importIDC(file, binaryView):
 		commentFunctions = binaryView.get_functions_containing(virtualAddr)
 
 		# In Binary Ninja, comments must be inside functions. In IDA, this isn't the case. We'll notify the user of this.
-		if commentFunctions == None:
+		if commentFunctions == None or len(commentFunctions) == 0:
 			if notifyUserNonFunctionComments == False:
 				notifyUserNonFunctionComments = True
 		else:

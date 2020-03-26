@@ -7,8 +7,6 @@ _Allows users to import idc database dumps from IDA into Binary Ninja._
 
 Making the switch from IDA to Binary Ninja but need your function names and symbols to carry over? This plugin will take an IDC file and automatically import the functions, strings, and comments. It doesn't require any additional plugins for IDA, just export from IDA to an IDC script file, and let this plugin do the work on Binary Ninja's end.
 
-![IDC Import Dialogue](https://i.imgur.com/xq3TO6v.png)
-
 ## Installation
 
 To install this plugin, go to Binary Ninja's plugin directory (can be found by going to Tools -> "Open Plugin Folder"), and run the following command:

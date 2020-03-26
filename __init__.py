@@ -77,8 +77,7 @@ def importIDC(file, binaryView):
 				# If the function hasn't already been defined by binja, we'll define it
 				functionsAtAddr = binaryView.get_functions_containing(virtualAddr)
 
-				if functionsAtAddr == None:
-					
+				if not functionsAtAddr:
 					binaryView.create_user_function(virtualAddr)
 
 				# Sometimes IDA tab aligns the end address for some reason, so we'll split by the comma and strip the tab + "0X" prefix
@@ -126,31 +125,20 @@ def importIDC(file, binaryView):
 	for func in functionList:
 		virtualAddr = int("0x" + functionList[func].start, 16)
 		funcName 	= functionList[func].name
-		binaryView.define_user_symbol(Symbol(SymbolType.DataSymbol, virtualAddr, funcName))
+
+		binaryView.define_user_symbol(Symbol(SymbolType.FunctionSymbol, virtualAddr, funcName))
 
 	for string in stringDefList:
 		virtualAddr = int("0x" + stringDefList[string].start, 16)
 		stringName  = stringDefList[string].name
+
 		binaryView.define_user_symbol(Symbol(SymbolType.DataSymbol, virtualAddr, stringName))
 
 	for cmt in commentList:
 		virtualAddr = int("0x" + commentList[cmt].start, 16)
 		commentTxt  = commentList[cmt].comment
 
-		# Get the containing function for the comment
-		commentFunctions = binaryView.get_functions_containing(virtualAddr)
-
-		# In Binary Ninja, comments must be inside functions. In IDA, this isn't the case. We'll notify the user of this.
-		if commentFunctions == None or len(commentFunctions) == 0:
-			if notifyUserNonFunctionComments == False:
-				notifyUserNonFunctionComments = True
-		else:
-			commentFunc = commentFunctions[0]
-			commentFunc.set_comment_at(virtualAddr, commentTxt)
-
-	if notifyUserNonFunctionComments:
-		show_message_box("Warning from IDC Importer", "The IDC file you imported contained comments that were outside of function definitions. " +
-			"Binary Ninja does not allow this, so those comments have not been ported over.", MessageBoxButtonSet.OKButtonSet, MessageBoxIcon.WarningIcon)
+		binaryView.set_comment_at(virtualAddr, commentTxt)
 
 	show_message_box("IDC Import Successful", "Symbols from the IDC file have been successfully imported. ", MessageBoxButtonSet.OKButtonSet, MessageBoxIcon.InformationIcon)
 

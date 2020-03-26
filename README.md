@@ -5,7 +5,9 @@ _Allows users to import idc database dumps from IDA into Binary Ninja._
 
 ## Description
 
-Making the switch from IDA to Binary Ninja but need your function names and symbols to carry over? This plugin will take an IDC file and automatically import the functions, strings, and comments.
+Making the switch from IDA to Binary Ninja but need your function names and symbols to carry over? This plugin will take an IDC file and automatically import the functions, strings, and comments. It doesn't require any additional plugins for IDA, just export from IDA to an IDC script file, and let this plugin do the work on Binary Ninja's end.
+
+![IDC Import Dialogue](https://i.imgur.com/xq3TO6v.png)
 
 ## Installation
 
@@ -27,18 +29,20 @@ After installation, an option labelled "Import IDC File" under the Tools menu sh
 
 Simply browse and open the IDC file you wish to import and click OK - the plugin will handle the rest.
 
-### Known Issues / Stipulations
+### Future Work
 
-- Comments made in IDA outside of functions will not carry over. This is because Binary Ninja (at least currently) does not allow setting comments in non-function areas.
-- Attempting to load an IDC of a different binary can seriously mess with your BNDB, as the plugin also tries to port function definitions, not just names!
+- ~~Comments made in IDA outside of functions will not carry over. This is because Binary Ninja (at least currently) does not allow setting comments in non-function areas.~~ This has been addressed in v1.1.
 - Support for porting structures / additional types is planned for in the near future.
+
+**Notes**
+
+- Do not attempt to load an IDC of a different binary, it can seriously mess with your BNDB, as the plugin also tries to port function definitions, not just names!
 
 ## Minimum Version
 
 This plugin requires the following minimum version of Binary Ninja:
 
- * release - 1.0.13
- * dev - 1.0.dev-175
+ * release - 1.3.2015
 
 
 ## License

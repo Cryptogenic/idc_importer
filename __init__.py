@@ -71,6 +71,13 @@ def importIDC(file, binaryView):
 			# Parse out definitions
 			if "add_func" in line:
 				startAddr 	= getBetween(line, "(0X", ",")
+				
+				if startAddr == "":
+					startAddr = "0"
+					endAddr = getBetween(line, "0", ")")
+				else:
+					endAddr 	= getBetween(line, "0X", ")")
+					
 				endAddr 	= getBetween(line, "0X", ")")
 				virtualAddr = int("0x" + startAddr, 16)
 

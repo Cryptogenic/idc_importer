@@ -70,13 +70,13 @@ def importIDC(file, binaryView):
 		for line in f:
 			# Parse out definitions
 			if "add_func" in line:
-				startAddr 	= getBetween(line, "(0X", ",")
+				startAddr = getBetween(line, "(0X", ",")
 				
 				if startAddr == "":
 					startAddr = "0"
 					endAddr = getBetween(line, "0", ")")
 				else:
-					endAddr 	= getBetween(line, "0X", ")")
+					endAddr = getBetween(line, "0X", ")")
 					
 				endAddr 	= getBetween(line, "0X", ")")
 				virtualAddr = int("0x" + startAddr, 16)
@@ -132,6 +132,9 @@ def importIDC(file, binaryView):
 	for func in functionList:
 		virtualAddr = int("0x" + functionList[func].start, 16)
 		funcName 	= functionList[func].name
+
+		if funcName == "":
+			continue
 
 		binaryView.define_user_symbol(Symbol(SymbolType.FunctionSymbol, virtualAddr, funcName))
 
